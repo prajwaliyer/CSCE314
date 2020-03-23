@@ -1,0 +1,25 @@
+(define (remove lst item)
+    (cond 
+        ((null? lst) '())
+        ((equal? item (car lst)) (cdr lst))
+        (else (cons (car lst) (remove (cdr lst) item)))
+    )
+)
+
+(define (removeTester)
+    (display "Before: ")
+    (display '(1 2 3 4 5))
+    (newline)
+    (display "Remove 4: ")
+    (display (remove '(1 2 3 4 5) 4))
+    (newline)
+
+    (display "Before: ")
+    (display '(#\a #\r #\t #\s #\e #\d #\g #\q #\c #\f))
+    (newline)
+    (display "Remove s: ")
+    (display (remove '(#\a #\r #\t #\s #\e #\d #\g #\q #\c #\f) #\s))
+    (newline)
+)
+
+(removeTester)
