@@ -103,26 +103,115 @@
 
 ;---------------START Let (creating local variable)--------------------;
     ; This allows one to create and use variables inside of functions
+    (define (getSignMessage num)
+        (let ((trueMessage "The value is negative.") (falseMessage "The value is non-negative."))
+            ; Make use of the defined vars in here
+            (if (< num 0)
+                trueMessage
+                falseMessage
+            )
+        )
+    )
 
-;-----------------END Let (creating local variable)--------------------;
+    ; Driver function
+    (define (letExample)
+        (display "10: ")
+        (display (getSignMessage 10))
+        (newline)
 
+        (display "-10: ")
+        (display (getSignMessage -10))
+        (newline)
+    )
+;-----------------END Let (creating local variables) ------------------;
 
-(define (driver)
-    (display "---------- Math Exercise ----------\n")
-    (mathExercise)
-    (display "-----------------------------------\n")
-    (newline)
+;---------------START Closures (This seems useless) -------------------;
+    ; Pulled this straight from the notes. I don't see this being
+    ; useful for this class.
+    (define (container value) 
+      (lambda () 
+         (string-append "This container contains " value ".")
+      )
+    )
     
-    (display "---------- Spread Example ---------\n")
-    (spreadExample)
-    (display "-----------------------------------\n")
-    (newline)
+    (define apple (container "an apple")) 
+    (define pie (container "a pie")) 
 
-    (display "--------- Optional Params ---------\n")
-    (optionalParamsExample)
-    (display "-----------------------------------\n")
-    (newline)   
-)
+    (define (closureExample)
+        (display (apple)) ; "This container contains an apple."
+        (newline)
+        (display (pie))   ; "This container contains a pie."
+        (newline)
+    )
+;-----------------END Closures (This seems useless) -------------------;
 
-(driver)
+;---------------START Lambdas (One line in-line functions) ------------;
+    (define (perfomOperation var1 var2 operation)
+        (operation var1 var2)
+    )
+    
+    (define (lambdaExample)
+        (display "!!Uses only one main function!! \n\n")
+        (display "Running with lambda (a + b): ")
+        (display (perfomOperation 10 5 (lambda (a b) (+ a b))))
+        (newline)
+
+        (display "Runnign with lambda (a - b): ")
+        (display (perfomOperation 10 5 (lambda (a b) (- a b))))
+        (newline)
+    )
+
+    ; Note the slightly altered syntax for when the function is name assigned to a lambda
+    (define double-any (lambda (f x) (f x x)))
+    (define (lambdaExample2)
+        (display "Double-any(f, x) => f(x, x):\n\n")
+        (display "Double-any(+, 5) => +(5, 5) = ")
+        (display (double-any + 5))
+        (newline)
+
+        (display "Double-any(*, 5) => *(5, 5) = ")
+        (display (double-any * 5))
+        (newline)
+    )
+;-----------------END Lambdas (One line in-line functions) ------------;
+
+
+;---------------START Driver Code -------------------------------------;
+    ; Driver function
+    (define (driver)
+        (display "---------- Math Exercise ----------\n")
+        (mathExercise)
+        (display "-----------------------------------\n")
+        (newline)
+        
+        (display "---------- Spread Example ---------\n")
+        (spreadExample)
+        (display "-----------------------------------\n")
+        (newline)
+
+        (display "--------- Optional Params ---------\n")
+        (optionalParamsExample)
+        (display "-----------------------------------\n")
+        (newline)   
+
+        (display "---------- Let Variables ----------\n")
+        (letExample)
+        (display "-----------------------------------\n")
+        (newline)  
+
+        (display "--------- Lambda Functions --------\n")
+        (lambdaExample)
+        (display "-----------------------------------\n")
+        (newline)  
+
+        (display "-------- Lambda Functions 2 -------\n")
+        (lambdaExample2)
+        (display "-----------------------------------\n")
+        (newline)  
+    )
+
+    ; Execute driver function
+    (driver)
+;-----------------END Driver Code -------------------------------------;
+
 (exit)
