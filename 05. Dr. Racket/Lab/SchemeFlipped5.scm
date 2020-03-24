@@ -1,0 +1,30 @@
+(define (intersection l1 l2)
+    (cond
+        ((null? l1) '())
+        ((exist? (car l1) l2)
+            (cons (car l1) (intersection (cdr l1) l2))
+        )
+        (else (intersection (cdr l1) l2))
+    )
+)
+
+(define (exist? e l)
+    (cond 
+        ((null? l) #f)
+        ((equal? e (car l)) #t)
+        (else (exist? e (cdr l)))
+    )
+)
+
+(define (main)
+    (display (intersection '(1 2 3 4) '(4 -1 2 5)))
+    (newline)
+    (display (intersection '(5 6 7 8 8) '(8 8)))
+    (newline)
+    (display (intersection '("Adil" "Nikhil" "Shawn" "Lupoli") '("Shawn" "Lupoli")))
+    (newline)
+    (display (intersection '(1 2 32 43 4 4 4 4 4 4) '()))
+)
+
+(main)
+(exit)
