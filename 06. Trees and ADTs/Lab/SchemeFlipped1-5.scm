@@ -217,9 +217,26 @@
 
 
 ; ------------------- START Problem 5 -------------------
+
+(define (replace-forest a b nodes)
+  (if (null? nodes)
+    '()
+    (cons (replace a b (car nodes)) (replace-forest a b (cdr nodes)))
+  )
+)
+
+(define (replace a b node)
+  (if (equal? a (datum node))
+    (make-node b (children node))
+    (make-node (datum node) (replace-forest a b (children node)))
+  )
+)
+
 (display "\n-------------------- Problem 5 --------------------\n")
-
-
-
+(display world-tree2)
+(newline)
+(newline)
+(display (replace 'china 'newChina world-tree2))
+(newline)
 ; -------------------- END Problem 5 --------------------
 
